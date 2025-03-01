@@ -4,11 +4,11 @@ public static class ConsoleUtil
 {
     public static void WriteLine(string input, ConsoleColor color)
     {
-        ConsoleUtil.WriteLine();
+        Console.WriteLine("");
         Console.ForegroundColor = color;
-        ConsoleUtil.WriteLine(input);
+        Console.WriteLine(input);
         Console.ResetColor();
-        ConsoleUtil.WriteLine();
+        Console.WriteLine();
     }
 
     public static void Write(string inputString, ConsoleColor color)

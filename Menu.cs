@@ -33,7 +33,7 @@ public class Menu
                         ConsoleUtil.WriteLine("Exiting application......", ConsoleColor.Green);
                         break;
 
-                    case 1: 
+                    case 1:
                         _accountManager.AddAccount();
                         break;
 
@@ -53,15 +53,13 @@ public class Menu
                         _accountManager.DeleteAccount();
                         break;
 
-                   /* case 6:
-                        _accountManager.ListAllAccounts();
-                        break;*/
+                    /* case 6:
+                         _accountManager.ListAllAccounts();
+                         break;*/
 
                     default:
                         ConsoleUtil.WriteLine("Invalid operation!", ConsoleColor.Red);
                         break;
-
-
                 }
             }
             catch (FormatException fe)

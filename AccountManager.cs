@@ -1,18 +1,18 @@
 namespace BankApp;
 
-
+using System;
 using System.Text.RegularExpressions;
-
 using ConsoleTables;
-
 
 public class AccountManager : IAccountManager
 {
     private readonly List<Account> Accounts;
+
     public AccountManager()
     {
         Accounts = [];
     }
+
     public Account AddAccountRequest()
     {
         Account account = new();
@@ -69,11 +69,14 @@ public class AccountManager : IAccountManager
             Gender = accountRequest.Gender,
             Password = accountRequest.Password,
             MaritalStatus = accountRequest.MaritalStatus,
-            CreatedAt = DateTime.Today
+            CreatedAt = DateTime.Today,
         };
 
         Accounts.Add(account);
-        ConsoleUtil.WriteLine($"Account with name {account.FirstName} and id {account.Id} created sucessfully!", ConsoleColor.Green);
+        ConsoleUtil.WriteLine(
+            $"Account with name {account.FirstName} and id {account.Id} created sucessfully!",
+            ConsoleColor.Green
+        );
     }
 
     /*  public void SearchAccountById()
@@ -115,16 +118,16 @@ public class AccountManager : IAccountManager
             return;
         }
         var result = $"""
-                ======ACCOUNT DETAILS=====
-                FirstName: {account.FirstName}
-                LastName: {account.LastName}
-                MiddleName: {account.MiddleName}
-                MobileNumber: {account.MobileNumber}
-                Email: {account.Email ?? "N/A"}
-                DateOfBirth: {account.DateOfBirth}
-                Gender: {account.Gender}
-                MaritalStatus: {account.MaritalStatus}
-                """;
+            ======ACCOUNT DETAILS=====
+            FirstName: {account.FirstName}
+            LastName: {account.LastName}
+            MiddleName: {account.MiddleName}
+            MobileNumber: {account.MobileNumber}
+            Email: {account.Email ?? "N/A"}
+            DateOfBirth: {account.DateOfBirth}
+            Gender: {account.Gender}
+            MaritalStatus: {account.MaritalStatus}
+            """;
 
         Console.WriteLine(result);
         Console.WriteLine();
@@ -140,7 +143,10 @@ public class AccountManager : IAccountManager
 
             if (account is null)
             {
-                ConsoleUtil.WriteLine("Account you are trying to delete does not exist!", ConsoleColor.Red);
+                ConsoleUtil.WriteLine(
+                    "Account you are trying to delete does not exist!",
+                    ConsoleColor.Red
+                );
                 return;
             }
 
@@ -161,21 +167,47 @@ public class AccountManager : IAccountManager
     {
         if (Accounts.Count == 0)
         {
-            ConsoleUtil.WriteLine("There is no account in the record yet.! Add a new account", ConsoleColor.Cyan);
+            ConsoleUtil.WriteLine(
+                "There is no account in the record yet.! Add a new account",
+                ConsoleColor.Cyan
+            );
             return;
         }
-        ConsoleTable table = new("ID", "FirstName", "LastName", "MiddleName", "MobileNumber", "Email", "DateOfBirth", "Gender", "CreatedAt", "ModifiedAt");
+        ConsoleTable table = new(
+            "ID",
+            "FirstName",
+            "LastName",
+            "MiddleName",
+            "MobileNumber",
+            "Email",
+            "DateOfBirth",
+            "Gender",
+            "CreatedAt",
+            "ModifiedAt"
+        );
 
         foreach (var account in Accounts)
         {
-            table.AddRow(account.Id, account.FirstName, account.LastName, account.MiddleName, account.MobileNumber, account.Email, account.DateOfBirth, account.Gender, account.CreatedAt.ToString("dd MMM, yyyy"), account.ModifiedAt.HasValue ? account.ModifiedAt?.ToString("dd MMM, yyyy h:mm:ss") : "N/A");
+            table.AddRow(
+                account.Id,
+                account.FirstName,
+                account.LastName,
+                account.MiddleName,
+                account.MobileNumber,
+                account.Email,
+                account.DateOfBirth,
+                account.Gender,
+                account.CreatedAt.ToString("dd MMM, yyyy"),
+                account.ModifiedAt.HasValue
+                    ? account.ModifiedAt?.ToString("dd MMM, yyyy h:mm:ss")
+                    : "N/A"
+            );
         }
 
         Console.WriteLine();
         table.Write(Format.Alternative);
         Console.WriteLine();
     }
-
 
     public void UpdateAccount()
     {
@@ -290,22 +322,21 @@ public class AccountManager : IAccountManager
         }
     }
 
-
     private void CheckPassword(string EnterText)
     {
         try
         {
             Console.Write(EnterText);
             var EnteredVal = "";
-            Consolekey key;
+            ConsoleKeyInfo key;
 
             while (true)
             {
-                key = Console.ReadKey(true);
+                key = Console.ReadKey();
 
-                if (key.key != ConsoleKey.Backspace && key.key != Consolekey.Enter)
+                if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
                 {
-                    EnteredVal += Key.keyChar;
+                    EnteredVal += key.KeyChar;
                     Console.Write("*");
                 }
                 else if (key.Key == ConsoleKey.Backspace && EnteredVal.Length > 0)
@@ -315,7 +346,7 @@ public class AccountManager : IAccountManager
                 }
                 else if (key.Key == ConsoleKey.Enter)
                 {
-                    Console.Write();
+                    Console.Write("");
 
                     if (string.IsNullOrWhiteSpace(EnteredVal))
                     {
@@ -335,50 +366,23 @@ public class AccountManager : IAccountManager
         {
             Console.WriteLine(ex);
         }
-
     }
 
-    public void SearchAccountById()
-    {
+    public void SearchAccountById() { }
 
-    }
+    public void ValidateAccountFisrtName(string name) { }
 
-    public void ValidateAccountFisrtName(string name)
-    {
+    public void ValidateAccountLastName(string name) { }
 
-    }
+    public void ValidateAccountMiddleName(string name) { }
 
-    public void ValidateAccountLastName(string name)
-    {
+    public void ValidateAccountMobileNumber(string name) { }
 
-    }
-    public void ValidateAccountMiddleName(string name)
-    {
+    public void ValidateAccountGender(string name) { }
 
-    }
-    public void ValidateAccountMobileNumber(string name)
-    {
+    public void ValidateAccountDateOfBirth(string name) { }
 
-    }
-    public void ValidateAccountGender(string name)
-    {
+    public void ValidateAccountMaritalStatus(string status) { }
 
-    }
-    public void ValidateAccountDateOfBirth(string name)
-    {
-
-
-
-    }
-    public void ValidateAccountMaritalStatus(string status)
-    {
-
-    }
-   public void ValidateAccountEmail(string status)
-    {
-
-    }
+    public void ValidateAccountEmail(string status) { }
 }
-
-
-

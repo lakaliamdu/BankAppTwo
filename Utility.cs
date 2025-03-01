@@ -1,10 +1,11 @@
 namespace BankApp;
+
 public static class Utility
 {
     public static int? SelectEnum(string screenMessage, int validStart, int validEnd)
     {
         int outValue;
-        
+
         while (true)
         {
             Console.Write(screenMessage);
@@ -15,7 +16,7 @@ public static class Utility
             {
                 return null;
             }
-            
+
             if (!isPasrable && (outValue >= validStart) && (outValue <= validEnd))
             {
                 break;
